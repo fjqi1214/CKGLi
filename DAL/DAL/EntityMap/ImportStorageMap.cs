@@ -57,6 +57,27 @@ namespace DAL
             Property(t => t.UnitNum)
             .HasColumnName("UnitNum")
             .IsRequired();
+
+            Property(t => t.Reserve)
+            .HasColumnName("Reserve")
+            .IsOptional();
+
+
+            HasOptional(t => t.Manu)
+                .WithMany(t => t.Imports)
+                .HasForeignKey(d => d.ManufacturerName)
+                .WillCascadeOnDelete(false);
+
+            HasOptional(t => t.StorageL)
+              .WithMany(t => t.Imports)
+              .HasForeignKey(d => d.LocationName)
+              .WillCascadeOnDelete(false);
+
+            HasOptional(t => t.Goods)
+              .WithMany(t => t.Imports)
+              .HasForeignKey(d => d.ProductName)
+              .WillCascadeOnDelete(false);
+
         }
 
     }

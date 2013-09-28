@@ -6,7 +6,7 @@ using System.Data.Entity.ModelConfiguration;
 using Model;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DAL.EntityMap
+namespace DAL
 {
     public class ExportStorageMap
         : EntityTypeConfiguration<ExportStorage>
@@ -14,41 +14,64 @@ namespace DAL.EntityMap
 
         public ExportStorageMap()
         {
-            ToTable("IExportStorageTable", "dbo");
+            ToTable("ExportStorageTable", "dbo");
             HasKey(t => t.Id);
             Property(t => t.Id)
-         .HasColumnName("Id")
-         .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
-         .IsRequired();
+            .HasColumnName("Id")
+            .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+            .IsRequired();
 
 
             Property(t => t.LocationName)
            .HasColumnName("LocationName")
-           .IsOptional();
+           .IsRequired();
 
 
             Property(t => t.ProductName)
-     .HasColumnName("ProductName")
-     .IsRequired();
+            .HasColumnName("ProductName")
+            .IsRequired();
+
+            Property(t => t.ManufacturerName)
+            .HasColumnName("ManufacturerName")
+            .IsRequired();
 
 
             Property(t => t.LotNumber)
-     .HasColumnName("LotNumber")
-     .IsRequired();
+            .HasColumnName("LotNumber")
+            .IsRequired();
 
 
             Property(t => t.ExpNum)
-  .HasColumnName("ExpNum")
-  .IsRequired();
+            .HasColumnName("ExpNum")
+            .IsRequired();
 
             Property(t => t.ExpTime)
-  .HasColumnName("ExpTime")
-  .IsRequired();
+            .HasColumnName("ExpTime")
+            .IsRequired();
 
             Property(t => t.UnitNum)
-  .HasColumnName("UnitNum")
-  .IsRequired();
+            .HasColumnName("UnitNum")
+            .IsRequired();
 
+            Property(t => t.Reserve)
+         .HasColumnName("Reserve")
+         .IsOptional();
+
+
+            HasRequired(t => t.Manu)
+           .WithMany(t => t.Exps)
+           .HasForeignKey(d => d.ManufacturerName)
+           .WillCascadeOnDelete(false);
+
+            HasRequired(t => t.StorageL)
+              .WithMany(t => t.Exps)
+              .HasForeignKey(d => d.LocationName)
+              .WillCascadeOnDelete(false);
+
+            HasRequired(t => t.Goods)
+              .WithMany(t => t.Exps)
+              .HasForeignKey(d => d.ProductName)
+              .WillCascadeOnDelete(false);
 
         }
 

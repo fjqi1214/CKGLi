@@ -5,6 +5,7 @@ using System.Text;
 using BLL;
 using Model;
 using DAL;
+using System.Data.Entity;
 
 namespace UnitTest
 {
@@ -15,8 +16,14 @@ namespace UnitTest
         static void Main(string[] args)
         {
            
-            TestSplitPager();
-            TestSqlHelp();
+            //TestSplitPager();
+            //TestSqlHelp();
+            Console.WriteLine("初始化数据库............");
+
+            Database.SetInitializer<CKGLContext>(new UserInitializer());
+            context.Users.Add(new User { Auth = 1, Pwd = "5555", UserName = "abc" });
+            context.SaveChanges();
+            Console.WriteLine("初始化数据库...........成功！");
             Console.ReadKey();
 
         }

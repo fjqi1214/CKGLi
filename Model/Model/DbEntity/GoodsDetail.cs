@@ -6,48 +6,46 @@ using System.Text;
 namespace Model
 {
     /// <summary>
-    /// 库位表
+    /// 厂家产品表
     /// </summary>
-    public class StorageLocation
+    public class GoodsDetail
     {
         /// <summary>
-        /// 货架号
+        /// 品名
         /// </summary>
-        public string LocationName { get; set; }
+        public string GoodsName { get; set; }
 
         /// <summary>
-        /// 厂家
+        /// 厂家名称
         /// </summary>
         public string ManufacturerName { get; set; }
 
         /// <summary>
-        /// 品名
+        /// 单位
         /// </summary>
-        public string ProductName { get; set; }
+        public string Units{ get; set; }
 
         /// <summary>
-        /// 货架
+        /// 有效日期 天数或月数或年数
         /// </summary>
-        public string CategoryName { get; set; }
+        public int EffectiveDate { get; set; }
 
         /// <summary>
-        /// 是否可用 true可用 false不可用
+        /// 保留
         /// </summary>
-        public bool CanUse { get; set; }
+        public string Reserve1 { get; set; }
 
-        public string Reserve { get; set; }
+        /// <summary>
+        /// 保留
+        /// </summary>
+        public string Reserve2 { get; set; }
 
 
 
-        public virtual StorageCategory Category { get; set; }
+        public virtual Manufacturer Manu { get; set; }
         public virtual ICollection<Product> Products { get; set; }
-
-        public virtual ICollection<CheckRecord> CheckRecords { get; set; }
-
-        public virtual ICollection<ExportStorage> Exps { get; set; }
-
         public virtual ICollection<ImportStorage> Imports { get; set; }
-
+        public virtual ICollection<ExportStorage> Exps { get; set; }
         public virtual ICollection<CheckRecord> Checks { get; set; }
 
     }

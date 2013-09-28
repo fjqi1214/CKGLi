@@ -58,7 +58,21 @@ namespace Model
         /// </summary>
         public int UnitNum { get; set; }
 
+        /// <summary>
+        /// 编号（自增）
+        /// </summary>
         public int Id { get; set; }
+
+        /// <summary>
+        /// 保留
+        /// </summary>
+        public string Reserve { get; set; }
+
+        public virtual Manufacturer Manu { get; set; }
+
+        public virtual StorageLocation StorageL { get; set; }
+
+        public virtual GoodsDetail Goods { get; set; }
 
     }
 }

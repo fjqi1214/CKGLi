@@ -47,10 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbEntity\CheckRecord.cs" />
+    <Compile Include="DbEntity\StoragePriority.cs" />
     <Compile Include="DbEntity\ExportStorage.cs" />
+    <Compile Include="DbEntity\GoodsDetail.cs" />
     <Compile Include="DbEntity\ImportStorage.cs" />
     <Compile Include="DbEntity\Manufacturer.cs" />
     <Compile Include="DbEntity\Product.cs" />
+    <Compile Include="DbEntity\StorageCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DbEntity\StorageLocation.cs" />
     <Compile Include="DbEntity\User.cs" />

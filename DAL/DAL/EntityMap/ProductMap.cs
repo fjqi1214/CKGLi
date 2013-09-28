@@ -32,11 +32,11 @@ namespace DAL
 
             Property(t => t.ManufacturerName)
                .HasColumnName("ManufacturerName")
-               .IsOptional();
+               .IsRequired();
 
             Property(t => t.LocationName)
                .HasColumnName("LocationName")
-               .IsOptional();
+               .IsRequired();
 
 
             Property(t => t.ProductName)
@@ -68,16 +68,23 @@ namespace DAL
            .HasColumnName("UnitNum")
            .IsRequired();
 
+            Property(t => t.Reserve)
+            .HasColumnName("Reserve")
+            .IsOptional();
 
-
-            HasOptional(t => t.Manu)
+            HasRequired(t => t.Manu)
                 .WithMany(t => t.Products)
                 .HasForeignKey(d => d.ManufacturerName)
                 .WillCascadeOnDelete(false);
 
-            HasOptional(t => t.StorageL)
+            HasRequired(t => t.StorageL)
               .WithMany(t => t.Products)
               .HasForeignKey(d => d.LocationName)
+              .WillCascadeOnDelete(false);
+
+            HasRequired(t => t.Goods)
+              .WithMany(t => t.Products)
+              .HasForeignKey(d => d.ProductName)
               .WillCascadeOnDelete(false);
         }
     }

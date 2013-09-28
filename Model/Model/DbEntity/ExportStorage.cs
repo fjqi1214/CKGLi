@@ -21,6 +21,11 @@ namespace Model
         public string ProductName { get; set; }
 
         /// <summary>
+        /// 厂家
+        /// </summary>
+        public string ManufacturerName { get; set; }
+        
+        /// <summary>
         /// lot.号
         /// </summary>
         public string LotNumber { get; set; }
@@ -35,13 +40,29 @@ namespace Model
         /// </summary>
         public int ExpNum { get; set; }
 
-
-
         /// <summary>
         /// 单位数量
         /// </summary>
         public int UnitNum { get; set; }
 
+        /// <summary>
+        /// 编号（自增）
+        /// </summary>
         public int Id { get; set; }
+
+        /// <summary>
+        /// 保留
+        /// </summary>
+        public string Reserve { get; set; }
+
+
+
+        public virtual Manufacturer Manu { get; set; }
+
+        public virtual StorageLocation StorageL { get; set; }
+
+        public virtual GoodsDetail Goods { get; set; }
+
+
     }
 }

@@ -10,9 +10,6 @@ namespace Model
     /// </summary>
     public class CheckRecord
     {
-
-
-        public int Id { get; set; }
         /// <summary>
         /// 库位
         /// </summary>
@@ -22,6 +19,11 @@ namespace Model
         /// 品名
         /// </summary>
         public string ProductName { get; set; }
+
+        /// <summary>
+        /// 厂家名称
+        /// </summary>
+        public string ManufacturerName { get; set; }
 
         /// <summary>
         /// 盘点状态
@@ -34,11 +36,31 @@ namespace Model
         public string LotNum { get; set; }
 
         /// <summary>
-        /// 单位数量
+        /// 盘点数量
         /// </summary>
-        public string UnitNumber { get; set; }
+        public string Number { get; set; }
+
+        /// <summary>
+        /// 盘点时间
+        /// </summary>
+        public DateTime CheckTime { get; set; }
+
+        /// <summary>
+        /// 编号 (自增)
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// 保留
+        /// </summary>
+        public string Reserve { get; set; }
 
 
+        public virtual Manufacturer Manu { get; set; }
+
+        public virtual StorageLocation StorageL { get; set; }
+
+        public virtual GoodsDetail Goods { get; set; }
 
     }
 }

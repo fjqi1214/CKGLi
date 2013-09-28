@@ -11,15 +11,25 @@ namespace Model
     public class User
     {
         public string UserName { get; set; }
-        public string pwd { get; set; }
-        public AuthLevel Auth { get; set; }
+        public string Pwd { get; set; }
+        /// <summary>
+        /// 0 特权,1普通
+        /// </summary>
+        public int Auth { get; set; }
         
     }
 
 
     public enum AuthLevel
     { 
+        /// <summary>
+        /// 普通用户
+        /// </summary>
         Common,
-        privilege,
+
+        /// <summary>
+        /// 特权用户
+        /// </summary>
+        Privilege,
     }
 }
