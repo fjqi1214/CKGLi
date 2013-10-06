@@ -10,6 +10,11 @@ namespace Model
     /// </summary>
     public class ExportStorage
     {
+        public ExportStorage()
+        {
+            ExpTime = DateTime.Now;
+        }
+
         /// <summary>
         /// 库位
         /// </summary>

@@ -9,7 +9,7 @@ namespace Utility
 {
     public class UtilityTool
     {
-
+     
         public static bool ConvertToInt(string numStr, out int num)
         {
             return int.TryParse(numStr, out num);

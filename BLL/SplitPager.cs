@@ -127,7 +127,6 @@ namespace BLL
                 currentTotalPageNum = total % pageSize == 0 ? k - 1 : k;
             }
             return currentTotalPageNum;
-        
         }
 
     }

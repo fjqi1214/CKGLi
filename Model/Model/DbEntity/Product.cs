@@ -10,10 +10,18 @@ namespace Model
     /// </summary>
     public class Product
     {
+        public Product()
+        {
+            ProductTime = DateTime.Now;
+            CheckTime = DateTime.Now;
+        }
+
+       
+
         /// <summary>
         /// 检验状态：未检/已检/冻结
         /// </summary>
-        public int  CheckStatu { get; set; }
+        public string  CheckStatu { get; set; }
 
         /// <summary>
         /// 厂家
@@ -65,11 +73,11 @@ namespace Model
         /// </summary>
         public int UnitNum { get; set; }
 
-        public int Id { get; set; }
+        
 
         public string Reserve { get; set; }
 
-
+        public int Id { get; set; }
 
         public virtual Manufacturer Manu { get; set; }
 

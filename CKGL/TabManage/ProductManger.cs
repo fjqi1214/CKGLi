@@ -74,6 +74,17 @@ namespace CKGL
         }
 
 
+        protected override int Save(List<Product> entities)
+        {
+            return pager.Update(entities);
+        }
+
+        protected override int Delete(List<Product> entities)
+        {
+            return pager.Delete(entities);
+        }
+
+
         private List<Expression<Func<Product, bool>>> GetFilters()
         {
             DateTime dateTime;
@@ -87,22 +98,16 @@ namespace CKGL
             if (!string.IsNullOrEmpty(SearchProduct))
             {
 
-                list.Add(b => b.ProductName == SearchProduct);
+                list.Add(b => b.ProductName.Contains(SearchProduct));
             }
 
             return list;
         }
 
-
-
-        public int Save()
-        {
-            return 0;
-        }
-
-
         public string SearchProduct { get; set; }
         public string SearchCheckTime { get; set; }
 
+
+      
     }
 }

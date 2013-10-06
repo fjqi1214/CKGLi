@@ -7,7 +7,8 @@ using Interface;
 
 namespace DAL
 {
-    public class StorageLocationCollection : IEnumerable<StorageLocation>
+    public class StorageLocationCollection : IEnumerable<StorageLocation>, 
+        IDataQuery<StorageLocation, string>
       
     {
 
@@ -88,5 +89,21 @@ namespace DAL
         {
            return StorageLocations.Count;
         }
+
+
+
+        #region IDataQuery<StorageLocation,string> Members
+
+        public IQueryable<StorageLocation> PagingQuery(int pageNum, int size, System.Linq.Expressions.Expression<Func<StorageLocation, string>> func, List<System.Linq.Expressions.Expression<Func<StorageLocation, bool>>> filters)
+        {
+            return storageLocations.OrderBy(i=>i.LocationName).Skip(pageNum * size).Take(size).AsQueryable();
+        }
+
+        public int GetCount(List<System.Linq.Expressions.Expression<Func<StorageLocation, bool>>> filters)
+        {
+            return storageLocations.Count();
+        }
+
+        #endregion
     }
 }

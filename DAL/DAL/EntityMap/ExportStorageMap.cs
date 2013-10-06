@@ -24,51 +24,51 @@ namespace DAL
 
             Property(t => t.LocationName)
            .HasColumnName("LocationName")
-           .IsRequired();
+           .IsOptional();
 
 
             Property(t => t.ProductName)
             .HasColumnName("ProductName")
-            .IsRequired();
+            .IsOptional();
 
             Property(t => t.ManufacturerName)
             .HasColumnName("ManufacturerName")
-            .IsRequired();
+            .IsOptional();
 
 
             Property(t => t.LotNumber)
             .HasColumnName("LotNumber")
-            .IsRequired();
+            .IsOptional();
 
 
             Property(t => t.ExpNum)
             .HasColumnName("ExpNum")
-            .IsRequired();
+            .IsOptional();
 
             Property(t => t.ExpTime)
             .HasColumnName("ExpTime")
-            .IsRequired();
+            .IsOptional();
 
             Property(t => t.UnitNum)
             .HasColumnName("UnitNum")
-            .IsRequired();
+            .IsOptional();
 
             Property(t => t.Reserve)
          .HasColumnName("Reserve")
          .IsOptional();
 
 
-            HasRequired(t => t.Manu)
+            HasOptional(t => t.Manu)
            .WithMany(t => t.Exps)
            .HasForeignKey(d => d.ManufacturerName)
            .WillCascadeOnDelete(false);
 
-            HasRequired(t => t.StorageL)
+            HasOptional(t => t.StorageL)
               .WithMany(t => t.Exps)
               .HasForeignKey(d => d.LocationName)
               .WillCascadeOnDelete(false);
 
-            HasRequired(t => t.Goods)
+            HasOptional(t => t.Goods)
               .WithMany(t => t.Exps)
               .HasForeignKey(d => d.ProductName)
               .WillCascadeOnDelete(false);

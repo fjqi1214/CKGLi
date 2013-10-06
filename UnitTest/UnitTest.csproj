@@ -41,6 +41,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,6 +60,10 @@
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{34C7CF0E-626E-4D11-86ED-55E26BE11EA2}</Project>
       <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CKGL\CKGL.csproj">
+      <Project>{3745278D-27C4-4966-9104-726E475015B9}</Project>
+      <Name>CKGL</Name>
     </ProjectReference>
     <ProjectReference Include="..\DAL\DAL\DAL.csproj">
       <Project>{4A531128-5224-4AF2-B0F1-9C993926FC6D}</Project>

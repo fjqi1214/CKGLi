@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.Entity;
 using Model;
+using DAL;
 
 namespace DAL
 {
@@ -45,9 +46,12 @@ namespace DAL
             modelBuilder.Configurations.Add(new StorageLocationMap());
             modelBuilder.Configurations.Add(new StoragePriorityMap());
             modelBuilder.Configurations.Add(new UserMap());
+            Database.SetInitializer<CKGLContext>(new CKGLInitializer());
+            
+            //Database.SetInitializer<CKGLContext>(new ProductInitializer());
+            //Database.SetInitializer<CKGLContext>(new ImportStorageInitializer());
 
-
-            base.OnModelCreating(modelBuilder);
+           
         }
 
     }

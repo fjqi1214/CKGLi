@@ -11,7 +11,12 @@ namespace Model
     /// </summary>
     public class ImportStorage
     {
-       
+        public ImportStorage()
+        {
+            ProductTime = DateTime.Now;
+            ArrivalTime = DateTime.Now;
+        }
+
         /// <summary>
         /// 厂家
         /// </summary>

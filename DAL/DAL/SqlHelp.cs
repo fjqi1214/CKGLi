@@ -8,8 +8,9 @@ using System.Linq.Expressions;
 using Utility;
 namespace DAL
 {
-    public class SqlHelp<T,Key> : IPersistent<T>, IDataQuery<T, Key> where T:class
+    public class SqlHelp<T, Key> : IPersistent<T>, IDataQuery<T, Key>, IValitdate<T>, IUserLogin where T : class
     {
+
         CKGLContext db;
         public SqlHelp(CKGLContext context)
         {
@@ -20,7 +21,6 @@ namespace DAL
 
         public IQueryable<T> PagingQuery(int pageNum, int size, Expression<Func<T, Key>> func, List<Expression<Func<T, bool>>> filters)
         {
-
             if (filters != null && filters.Count != 0)
             {
                 //if (filters.Count == 3)
@@ -42,12 +42,13 @@ namespace DAL
                     return db.Set<T>().Where(filters[0]).OrderBy(func).Skip(pageNum * size).Take(size);
                 }
             }
+
             return db.Set<T>().OrderBy(func).Skip(pageNum * size).Take(size);
         }
 
         public int GetCount(List<Expression<Func<T, bool>>> filters)
         {
-            
+
             if (filters != null && filters.Count != 0)
             {
                 if (filters.Count == 2)
@@ -61,10 +62,8 @@ namespace DAL
 
             }
             return db.Set<T>().Count();
-           
-        }
 
-      
+        }
 
         #endregion
 
@@ -77,9 +76,11 @@ namespace DAL
         /// <returns></returns>
         public int Update(List<T> entities)
         {
+            int num = 0;
             if (entities != null && entities.Count > 0)
             {
                 List<T> modiftyList = new List<T>();
+                List<T> addList = new List<T>();
                 foreach (var e in entities)
                 {
 
@@ -87,14 +88,57 @@ namespace DAL
                     {
                         continue;
                     }
-                    else
+                    else if (db.Entry<T>(e).State == System.Data.EntityState.Detached)
+                    {
+                        addList.Add(e);
+                    }
+                    else if (db.Entry<T>(e).State == System.Data.EntityState.Modified)
                     {
                         modiftyList.Add(e);
                     }
                 }
-                foreach (var e in modiftyList)
+
+              
+
+                RecoverHandler.RecoverError(() =>
                 {
-                    db.Entry<T>(e).State = System.Data.EntityState.Modified;
+
+                    foreach (var e in modiftyList)
+                    {
+                        db.Entry<T>(e).State = System.Data.EntityState.Modified;
+
+                    }
+                    foreach (var e in addList)
+                    {
+                        db.Set<T>().Add(e);
+                    }
+                    num = db.SaveChanges();
+                }
+                  , () =>
+                  {
+                      foreach (var e in addList)
+                      {
+                          db.Set<T>().Remove(e);
+                      }
+
+                  });
+            }
+
+            return num;
+
+        }
+
+        public int Delete(List<T> entities)
+        {
+            if (entities != null && entities.Count > 0)
+            {
+                foreach (var e in entities)
+                {
+                    if (db.Entry<T>(e).State == System.Data.EntityState.Detached)
+                    {
+                        continue;
+                    }
+                    db.Entry<T>(e).State = System.Data.EntityState.Deleted;
 
                 }
                 return db.SaveChanges();
@@ -106,14 +150,35 @@ namespace DAL
 
         }
 
-        public int Delete(List<T> e)
+        public int Insert(List<T> e)
         {
             throw new NotImplementedException();
         }
 
-        public int Insert(List<T> e)
+        #endregion
+
+        #region IUserLogin Members
+
+        public User GetUser(string name, string pwd)
         {
-            throw new NotImplementedException();
+            var user = this.db.Users.Where(i => i.UserName == name && i.Pwd == pwd).FirstOrDefault();
+
+            return user;
+        }
+        #endregion
+
+
+
+        #region IValitdate<T,Key> Members
+
+        public bool ValitedateKeyUnique(Expression<Func<T, bool>> func)
+        {
+            var count = this.db.Set<T>().Count<T>(func);
+            if (count == 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         #endregion

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Entity.ModelConfiguration;
-using DAL.EntityMap;
+using DAL;
 using Model;
 
 namespace DAL

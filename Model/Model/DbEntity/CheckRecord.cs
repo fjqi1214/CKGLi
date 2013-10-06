@@ -10,6 +10,10 @@ namespace Model
     /// </summary>
     public class CheckRecord
     {
+        public CheckRecord()
+        {
+            CheckTime = DateTime.Now;
+        }
         /// <summary>
         /// 库位
         /// </summary>
@@ -38,7 +42,7 @@ namespace Model
         /// <summary>
         /// 盘点数量
         /// </summary>
-        public string Number { get; set; }
+        public int Number { get; set; }
 
         /// <summary>
         /// 盘点时间

@@ -9,12 +9,12 @@ using System.Linq.Expressions;
 namespace BLL
 {
     public class SplitePageQuery<T, Key> : ISplitePageQuery<T, Key>
-       
+        , IPersistent<T>, IValitdate<T>
     {
 
         CKGLContext context = new CKGLContext();
 
-        private Dictionary<Type, object> Pagingquery;
+        public Dictionary<Type, object> Pagingquery;
 
         public SplitePageQuery()
         {
@@ -25,6 +25,7 @@ namespace BLL
                 {typeof(ImportStorage),new SqlHelp<ImportStorage,int>(this.context)},
                 {typeof(Manufacturer),new  SqlHelp<Manufacturer,string>(this.context)},
                 {typeof(Product),new  SqlHelp<Product,int>(this.context) },
+                {typeof(GoodsDetail),new SqlHelp<GoodsDetail,string>(this.context)}
             };
         }
         private SplitPager pager;
@@ -47,7 +48,7 @@ namespace BLL
             pager.MoveNextPage();
 
             var items = ((IDataQuery<T, Key>)Pagingquery[typeof(T)])
-                .PagingQuery(pager.CurrentPageNum, pager.PageSize, func,filters);
+                .PagingQuery(pager.CurrentPageNum, pager.PageSize, func, filters);
             return items;
         }
 
@@ -55,19 +56,19 @@ namespace BLL
         {
             pager.MovePreviousPage();
             var items = ((IDataQuery<T, Key>)Pagingquery[typeof(T)])
-                 .PagingQuery(pager.CurrentPageNum, pager.PageSize, func,filters);
+                 .PagingQuery(pager.CurrentPageNum, pager.PageSize, func, filters);
             return items;
         }
 
-        public IQueryable<T> MoveLastPage(Expression<Func<T, Key>> func,List<Expression<Func<T, bool>>> filters)
+        public IQueryable<T> MoveLastPage(Expression<Func<T, Key>> func, List<Expression<Func<T, bool>>> filters)
         {
             var total = ((IDataQuery<T, Key>)Pagingquery[typeof(T)]).GetCount(filters);
             pager.MoveLastPage(total);
             return ((IDataQuery<T, Key>)Pagingquery[typeof(T)])
-               .PagingQuery(pager.CurrentPageNum, pager.PageSize, func,filters);
+               .PagingQuery(pager.CurrentPageNum, pager.PageSize, func, filters);
         }
 
-        public IQueryable<T> MoveFirstPage(Expression<Func<T, Key>> func,List<Expression<Func<T, bool>>> filters)
+        public IQueryable<T> MoveFirstPage(Expression<Func<T, Key>> func, List<Expression<Func<T, bool>>> filters)
         {
             var total = ((IDataQuery<T, Key>)Pagingquery[typeof(T)]).GetCount(filters);
             if (pager == null)
@@ -79,7 +80,7 @@ namespace BLL
                 .PagingQuery(pager.CurrentPageNum, pager.PageSize, func, filters);
         }
 
-        public IQueryable<T> MoveToPage(Expression<Func<T, Key>> func, int num,List<Expression<Func<T, bool>>> filters)
+        public IQueryable<T> MoveToPage(Expression<Func<T, Key>> func, int num, List<Expression<Func<T, bool>>> filters)
         {
             pager.MoveToPage(num - 1);
             return ((IDataQuery<T, Key>)Pagingquery[typeof(T)])
@@ -106,16 +107,26 @@ namespace BLL
         public int Update(List<T> e)
         {
             return ((IPersistent<T>)Pagingquery[typeof(T)]).Update(e);
+
         }
 
         public int Delete(List<T> e)
         {
-            throw new NotImplementedException();
+            return ((IPersistent<T>)Pagingquery[typeof(T)]).Delete(e);
         }
 
         public int Insert(List<T> e)
         {
             throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IValitdate<T> Members
+
+        public bool ValitedateKeyUnique(Expression<Func<T, bool>> func)
+        {
+            return ((IValitdate<T>)Pagingquery[typeof(T)]).ValitedateKeyUnique(func);
         }
 
         #endregion

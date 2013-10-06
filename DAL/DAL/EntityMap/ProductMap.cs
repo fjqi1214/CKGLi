@@ -27,34 +27,34 @@ namespace DAL
 
             Property(t => t.CheckStatu)
                .HasColumnName("CheckStatu")
-               .IsRequired();
+               .IsOptional();
 
 
             Property(t => t.ManufacturerName)
                .HasColumnName("ManufacturerName")
-               .IsRequired();
+               .IsOptional();
 
             Property(t => t.LocationName)
                .HasColumnName("LocationName")
-               .IsRequired();
+               .IsOptional();
 
 
             Property(t => t.ProductName)
                .HasColumnName("ProductName")
-               .IsRequired();
+               .IsOptional();
 
             Property(t => t.LotNum)
                .HasColumnName("LotNum")
-               .IsRequired();
+               .IsOptional();
 
             Property(t => t.ProductTime)
                .HasColumnName("ProductTime")
-               .IsRequired();
+               .IsOptional();
 
 
             Property(t => t.Number)
               .HasColumnName("Number")
-              .IsRequired();
+              .IsOptional();
 
             Property(t => t.CheckTime)
                 .HasColumnName("CheckTime")
@@ -62,27 +62,27 @@ namespace DAL
 
             Property(t => t.MaterialNo)
                .HasColumnName("MaterialNo")
-               .IsRequired();
+               .IsOptional();
 
             Property(t => t.UnitNum)
            .HasColumnName("UnitNum")
-           .IsRequired();
+           .IsOptional();
 
             Property(t => t.Reserve)
             .HasColumnName("Reserve")
             .IsOptional();
 
-            HasRequired(t => t.Manu)
+            HasOptional(t => t.Manu)
                 .WithMany(t => t.Products)
                 .HasForeignKey(d => d.ManufacturerName)
                 .WillCascadeOnDelete(false);
 
-            HasRequired(t => t.StorageL)
+            HasOptional(t => t.StorageL)
               .WithMany(t => t.Products)
               .HasForeignKey(d => d.LocationName)
               .WillCascadeOnDelete(false);
 
-            HasRequired(t => t.Goods)
+            HasOptional(t => t.Goods)
               .WithMany(t => t.Products)
               .HasForeignKey(d => d.ProductName)
               .WillCascadeOnDelete(false);

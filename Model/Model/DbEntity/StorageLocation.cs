@@ -37,9 +37,8 @@ namespace Model
 
         public string Reserve { get; set; }
 
-
-
         public virtual StorageCategory Category { get; set; }
+
         public virtual ICollection<Product> Products { get; set; }
 
         public virtual ICollection<CheckRecord> CheckRecords { get; set; }

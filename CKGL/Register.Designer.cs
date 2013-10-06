@@ -30,14 +30,18 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.txtRegUserName = new System.Windows.Forms.TextBox();
+            this.btnRegOk = new System.Windows.Forms.Button();
+            this.cbAuth = new System.Windows.Forms.ComboBox();
+            this.btnRegRetset = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtRegPwd = new System.Windows.Forms.TextBox();
+            this.txtRegPwd2 = new System.Windows.Forms.TextBox();
+            this.labTip = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -58,41 +62,45 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "请输入密码：";
             // 
-            // textBox1
+            // txtRegUserName
             // 
-            this.textBox1.Location = new System.Drawing.Point(150, 41);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(139, 21);
-            this.textBox1.TabIndex = 1;
+            this.txtRegUserName.Location = new System.Drawing.Point(150, 41);
+            this.txtRegUserName.Name = "txtRegUserName";
+            this.txtRegUserName.Size = new System.Drawing.Size(139, 21);
+            this.txtRegUserName.TabIndex = 1;
+            this.txtRegUserName.Leave += new System.EventHandler(this.txtRegUserName_Leave);
             // 
-            // button1
+            // btnRegOk
             // 
-            this.button1.Location = new System.Drawing.Point(58, 254);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "确定";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnRegOk.Location = new System.Drawing.Point(58, 254);
+            this.btnRegOk.Name = "btnRegOk";
+            this.btnRegOk.Size = new System.Drawing.Size(75, 23);
+            this.btnRegOk.TabIndex = 2;
+            this.btnRegOk.Text = "确定";
+            this.btnRegOk.UseVisualStyleBackColor = true;
+            this.btnRegOk.Click += new System.EventHandler(this.btnRegOk_Click);
             // 
-            // comboBox1
+            // cbAuth
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cbAuth.FormattingEnabled = true;
+            this.cbAuth.Items.AddRange(new object[] {
             "普通成员",
             "管理员"});
-            this.comboBox1.Location = new System.Drawing.Point(150, 197);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(139, 20);
-            this.comboBox1.TabIndex = 3;
+            this.cbAuth.Location = new System.Drawing.Point(150, 197);
+            this.cbAuth.Name = "cbAuth";
+            this.cbAuth.Size = new System.Drawing.Size(139, 20);
+            this.cbAuth.TabIndex = 3;
+            this.cbAuth.Text = "普通成员";
             // 
-            // button2
+            // btnRegRetset
             // 
-            this.button2.Location = new System.Drawing.Point(196, 254);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "重置";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnRegRetset.Location = new System.Drawing.Point(196, 254);
+            this.btnRegRetset.Name = "btnRegRetset";
+            this.btnRegRetset.Size = new System.Drawing.Size(75, 23);
+            this.btnRegRetset.TabIndex = 2;
+            this.btnRegRetset.Text = "重置";
+            this.btnRegRetset.UseVisualStyleBackColor = true;
+            this.btnRegRetset.Click += new System.EventHandler(this.btnRegRetset_Click);
             // 
             // label3
             // 
@@ -112,31 +120,80 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "请选择权限";
             // 
-            // textBox2
+            // txtRegPwd
             // 
-            this.textBox2.Location = new System.Drawing.Point(150, 93);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(139, 21);
-            this.textBox2.TabIndex = 1;
+            this.txtRegPwd.Location = new System.Drawing.Point(150, 93);
+            this.txtRegPwd.Name = "txtRegPwd";
+            this.txtRegPwd.PasswordChar = '*';
+            this.txtRegPwd.Size = new System.Drawing.Size(139, 21);
+            this.txtRegPwd.TabIndex = 1;
             // 
-            // textBox3
+            // txtRegPwd2
             // 
-            this.textBox3.Location = new System.Drawing.Point(150, 146);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(139, 21);
-            this.textBox3.TabIndex = 1;
+            this.txtRegPwd2.Location = new System.Drawing.Point(150, 146);
+            this.txtRegPwd2.Name = "txtRegPwd2";
+            this.txtRegPwd2.PasswordChar = '*';
+            this.txtRegPwd2.Size = new System.Drawing.Size(139, 21);
+            this.txtRegPwd2.TabIndex = 1;
+            // 
+            // labTip
+            // 
+            this.labTip.AutoSize = true;
+            this.labTip.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labTip.ForeColor = System.Drawing.Color.Red;
+            this.labTip.Location = new System.Drawing.Point(56, 20);
+            this.labTip.Name = "labTip";
+            this.labTip.Size = new System.Drawing.Size(0, 12);
+            this.labTip.TabIndex = 4;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(295, 44);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 12);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "*必填";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(295, 96);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 12);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "*必填";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(295, 149);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(38, 12);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "*必填";
             // 
             // Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(341, 311);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(352, 312);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.labTip);
+            this.Controls.Add(this.cbAuth);
+            this.Controls.Add(this.btnRegRetset);
+            this.Controls.Add(this.btnRegOk);
+            this.Controls.Add(this.txtRegPwd2);
+            this.Controls.Add(this.txtRegPwd);
+            this.Controls.Add(this.txtRegUserName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -152,13 +209,17 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox txtRegUserName;
+        private System.Windows.Forms.Button btnRegOk;
+        private System.Windows.Forms.ComboBox cbAuth;
+        private System.Windows.Forms.Button btnRegRetset;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtRegPwd;
+        private System.Windows.Forms.TextBox txtRegPwd2;
+        private System.Windows.Forms.Label labTip;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }

@@ -35,28 +35,28 @@ namespace DAL
 
             Property(t => t.LotNum)
            .HasColumnName("LotNum")
-           .IsRequired();
+           .IsOptional();
 
             Property(t => t.ProductTime)
              .HasColumnName("ProductTime")
-             .IsRequired();
+             .IsOptional();
 
             Property(t => t.ArrivalTime)
             .HasColumnName("ArrivalTime")
-            .IsRequired();
+            .IsOptional();
 
             Property(t => t.Number)
              .HasColumnName("Number")
-             .IsRequired();
+             .IsOptional();
 
 
             Property(t => t.MaterialNo)
             .HasColumnName("MaterialNo")
-            .IsRequired();
+            .IsOptional();
 
             Property(t => t.UnitNum)
             .HasColumnName("UnitNum")
-            .IsRequired();
+            .IsOptional();
 
             Property(t => t.Reserve)
             .HasColumnName("Reserve")

@@ -53,8 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ErrorHandle.cs" />
     <Compile Include="TabManage\CheckRecordManage.cs" />
     <Compile Include="TabManage\ExportStorageManage.cs" />
+    <Compile Include="TabManage\GoodsManage.cs" />
     <Compile Include="TabManage\ImportStorageManage.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -84,7 +86,7 @@
     <Compile Include="RePasswd.Designer.cs">
       <DependentUpon>RePasswd.cs</DependentUpon>
     </Compile>
-    <Compile Include="TabManage\StorageLocation.cs" />
+    <Compile Include="TabManage\StorageLocationManage.cs" />
     <Compile Include="TabManage\TabManager.cs" />
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

@@ -37,4 +37,10 @@ namespace Interface
         int Insert(List<T> e);
     }
 
+    public interface IValitdate<T>
+    {
+        bool ValitedateKeyUnique(Expression<Func<T, bool>> func);
+    }
+
+
 }
