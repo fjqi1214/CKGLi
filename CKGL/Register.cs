@@ -52,7 +52,7 @@ namespace CKGL
                     return;
                 }
                 int auth = 0;
-                if (cbAuth.Text == "管理员") auth = 1;
+                if (cbAuth.Text == "普通成员") auth = 1;
                 int result = service.Register(txtRegUserName.Text, txtRegPwd.Text, auth);
                 if (result == 1)
                 {

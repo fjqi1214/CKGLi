@@ -10,7 +10,6 @@ using Model;
 using BLL;
 using DAL;
 using Interface;
-using DAL;
 using System.Data.Entity;
 using Utility;
 using System.Linq.Expressions;
@@ -334,7 +333,12 @@ namespace CKGL
                             && string.IsNullOrEmpty(this.dgvSl.Rows[e.RowIndex].ErrorText))
                             e.Cancel = true;
                         break;
+                    case 3:
+                          if (this.dgvSl.Rows[e.RowIndex].Cells[0].Value != null)
+                            e.Cancel = true;
+                        break;
                 }
+               
             }, "Debug.data");
         }
 
@@ -380,7 +384,7 @@ namespace CKGL
                         else
                         {
                             e.Cancel = false;
-                            this.dgvSl.Rows[e.RowIndex].ErrorText = "";
+                          
                             Regex regex = new Regex(@"^[A-T]$");
                             var result = regex.IsMatch(e.FormattedValue.ToString());
                             if (!result)
@@ -390,7 +394,7 @@ namespace CKGL
                             }
                             else
                             {
-                                this.dgvSl.Rows[e.RowIndex].ErrorText = "";
+                               
                                 e.Cancel = false;
                             }
                         }

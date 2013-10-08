@@ -98,21 +98,23 @@ namespace DAL
                     }
                 }
 
-              
+                foreach (var e in modiftyList)
+                {
+                    db.Entry<T>(e).State = System.Data.EntityState.Modified;
+
+                }
+                num = db.SaveChanges();
 
                 RecoverHandler.RecoverError(() =>
                 {
 
-                    foreach (var e in modiftyList)
-                    {
-                        db.Entry<T>(e).State = System.Data.EntityState.Modified;
-
-                    }
                     foreach (var e in addList)
                     {
                         db.Set<T>().Add(e);
                     }
-                    num = db.SaveChanges();
+
+                    int addNum = db.SaveChanges();
+                    num += addNum;
                 }
                   , () =>
                   {
